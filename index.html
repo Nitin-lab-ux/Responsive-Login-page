@@ -1,0 +1,212 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Login Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+
+        .login-box {
+            background-color: rgb(255, 255, 255);
+            padding: 40px;
+            border-radius: 45px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        .user-box {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .user-box input {
+            width: 100%;
+            padding: 10px;
+            background: none;
+            border: none;
+            border-bottom: 1px solid #333;
+            outline: none;
+            color: #333;
+            transition: all 0.5s ease;
+        }
+
+        .user-box label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            pointer-events: none;
+            transition: 0.5s;
+            color: #333;
+        }
+
+        .user-box input:focus ~ label,
+        .user-box input:valid ~ label {
+            top: -20px;
+            left: 0;
+            color: #333;
+            font-size: 12px;
+        }
+
+        button {
+            background-color: #333;
+            border: none;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .password-container {
+            position: relative;
+            width: 100%;
+            margin: 50px auto;
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        #password {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background: none;
+            border: none;
+            border-bottom: 1px solid #333;
+            outline: none;
+            color: #333;
+            transition: all 0.5s ease;
+        }
+
+        .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        #password-label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            pointer-events: none;
+            transition: 0.5s;
+            color: #333;
+        }
+
+        #password:focus ~ #password-label,
+        #password:valid ~ #password-label {
+            top: -20px;
+            left: 0;
+            color: #333;
+            font-size: 12px;
+        }
+
+        p {
+            padding: 15px;
+        }
+
+        button:hover {
+            background-color: #282828;
+        }
+
+        @media (max-width: 600px) {
+            .login-box {
+                padding: 20px;
+            }
+
+            button {
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <h2>Login</h2>
+            <form>
+                <div class="user-box">
+                    <input type="text" name="username" required>
+                    <label>Username</label>
+                </div>
+                <div class="user-box">
+                    <div class="password-container">
+                        <div class="password-wrapper">
+                            <input type="password" id="password" name="password" required>
+                            <label for="password" id="password-label">Password</label>
+                            <i id="toggle-password" class="fa fa-eye eye-icon"></i>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit">
+                    Login
+                </button>
+                <p class="signup-link">
+                    Don't have an account? <a href="signup.html">Sign up</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('toggle-password').addEventListener('click', function () {
+            const passwordField = document.getElementById('password');
+            const passwordFieldType = passwordField.getAttribute('type');
+            
+            if (passwordFieldType === 'password') {
+                passwordField.setAttribute('type', 'text');
+                this.classList.remove('fa-eye');
+                this.classList.add('fa-eye-slash');
+            } else {
+                passwordField.setAttribute('type', 'password');
+                this.classList.remove('fa-eye-slash');
+                this.classList.add('fa-eye');
+            }
+        });
+
+        document.getElementById('password').addEventListener('input', function () {
+            const passwordLabel = document.getElementById('password-label');
+            if (this.value.length > 0) {
+                passwordLabel.classList.add('hidden');
+            } else {
+                passwordLabel.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
